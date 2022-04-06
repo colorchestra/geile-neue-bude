@@ -4,6 +4,7 @@
 from bs4 import BeautifulSoup
 import requests
 import sys
+import time
 
 index_url = ""
 webhook_url = ""
@@ -52,6 +53,7 @@ def get_articles_from_index():
             # new_ads = new_ads + 1 # TODO
             print("New ad found! " + ad_name)
             notify(webhook_input = f"Neue Wohnung!\n{ad_name}\nhttps://ebay-kleinanzeigen.de{ad_url}")
+            time.sleep(15)  # take a nap to avoid hitting Discord's rate limit. TODO: get the actual time from response headers
 
 print("Reading database file...")
 read_file()
