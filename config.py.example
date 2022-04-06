@@ -1,0 +1,8 @@
+#!/usr/bin/python3
+
+# your search term on 'that site'. Just take it from your browser's URL bar after all filters have been set.
+index_url = ""  
+# URL to your Discord webhook
+webhook_url = ""
+# words that you don't want in search results
+filter_words = ['zwischenmiete', 'untermiete', 'tausch', 'moebliert', 'offenbach'] 
