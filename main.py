@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 import requests
 import sys
 import time
+import datetime
 import config
 
 index_url = config.index_url
@@ -62,7 +63,7 @@ def get_articles_from_index():
             all_urls.append(ad_url)
             if filter_url(ad_url):
                 print("New ad found! " + ad_name)
-                notify(webhook_input = f"Neue Wohnung!\n{ad_name}\nhttps://ebay-kleinanzeigen.de{ad_url}")
+                notify(webhook_input = f"{datetime.datetime.now()} Neue Wohnung!\n\n{ad_name}\nhttps://ebay-kleinanzeigen.de{ad_url}")
                 time.sleep(15)  # take a nap to avoid hitting Discord's rate limit. TODO: get the actual time from response headers
             # new_ads = new_ads + 1 # TODO
 
