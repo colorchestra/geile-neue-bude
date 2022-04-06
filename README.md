@@ -1,0 +1,1 @@
+Scrapes a well-known german website (which shall not be named) for new apartment offers so you'll be the first to know about it. Also notifies you about it, currently implemented to fit a Discord webhook.
