@@ -3,5 +3,5 @@
 date
 while true; do
     python3 ./main.py
-    sleep $(( $RANDOM % 300 ))
+    sleep $(( $RANDOM % 120 ))
 done
