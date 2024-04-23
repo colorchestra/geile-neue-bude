@@ -44,9 +44,9 @@ def notify(webhook_input):
     except requests.exceptions.HTTPError as err:
         print(err)
     else:
-        print("Payload delivered successfully, code {}.".format(result.status_code))
+        print("Ad posted to Discord.")
 
-def filter_url(input_url):
+def url_contains_no_filtered_words(input_url):
     for word in filter_words:
         if word in input_url:
             print(f"Filtered {input_url} for {word}")
@@ -64,9 +64,9 @@ def get_articles_from_index():
         ad_name = ad_info.string
         if ad_url not in all_urls:
             all_urls.append(ad_url)
-            if filter_url(ad_url):
+            if url_contains_no_filtered_words(ad_url):
                 print("New ad found! " + ad_name)
-                notify(webhook_input = f"{datetime.datetime.now()} Neue Wohnung!\n\n{ad_name}\nhttps://kleinanzeigen.de{ad_url}")
+                notify(webhook_input = f"{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')} Neue Wohnung!\n\n{ad_name}\nhttps://kleinanzeigen.de{ad_url}")
                 time.sleep(15)  # take a nap to avoid hitting Discord's rate limit. TODO: get the actual time from response headers
             # new_ads = new_ads + 1 # TODO
 
