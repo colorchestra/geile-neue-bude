@@ -10,6 +10,7 @@ import config
 from config import index_url, webhook_url, filter_words
 
 db_file = "db.txt"
+filtered_file = "filtered.txt"
 all_urls = []
 new_ads = 0
 
@@ -23,10 +24,14 @@ def read_file():
         print('Database file nout found - creating it...')
         open('db.txt', 'w').close()
 
-def write_file():
-    with open(db_file, 'w') as db:
-        for url in all_urls:
-            db.write(url + '\n')
+def write_list_to_file(file_name, list_name):
+    with open(file_name, 'w') as file_raw:
+        for item in list_name:
+            file_raw.write(item + '\n')
+
+def append_to_file(file_name, append_content):
+    with open(file_name, 'a') as file_raw:
+        file_raw.write(append_content+ '\n')
 
 def notify(webhook_input):
     data = {
@@ -44,8 +49,9 @@ def notify(webhook_input):
 def filter_url(input_url):
     for word in filter_words:
         if word in input_url:
-            print(f"{word} in {input_url}")
-            print(f"URL {input_url} contains a filtered word. You won't be notified.")
+            print(f"Filtered {input_url} for {word}")
+            # log filtered output
+            append_to_file(filtered_file, f"{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}: '{word}' found in '{input_url}'")
             return False
     return True
 
