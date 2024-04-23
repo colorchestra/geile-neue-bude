@@ -61,7 +61,10 @@ def get_articles_from_index():
     for article in index_soup.find_all('article'):
         ad_url = article.get('data-href')
         ad_info = article.find('a', class_='ellipsis')
-        ad_name = ad_info.string
+        try:
+            ad_name = ad_info.string
+        except AttributeError:
+            ad_name = "Ad name empty"
         if ad_url not in all_urls:
             all_urls.append(ad_url)
             if url_contains_no_filtered_words(ad_url):
