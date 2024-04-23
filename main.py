@@ -14,15 +14,15 @@ filtered_file = "filtered.txt"
 all_urls = []
 new_ads = 0
 
-def read_file():
+def read_file(file_name):
     try:
-        with open(db_file, 'r') as db:
-            lines = db.readlines()
+        with open(file_name, 'r') as file_raw:
+            lines = file_raw.readlines()
             for line in lines:
                 all_urls.append(line.rstrip('\n'))
     except FileNotFoundError:
-        print('Database file nout found - creating it...')
-        open('db.txt', 'w').close()
+        print(f'File {file_name} not found - creating it...')
+        open(file_name, 'w').close()
 
 def write_list_to_file(file_name, list_name):
     with open(file_name, 'w') as file_raw:
@@ -71,10 +71,10 @@ def get_articles_from_index():
             # new_ads = new_ads + 1 # TODO
 
 print("Reading database file...")
-read_file()
+read_file(db_file)
 print("Scraping ads from Ebay Kleinanzeigen...")
 get_articles_from_index()
 #print("New ads found in this run: " + str(new_ads))
 print("Writing database...")
-write_file()
+write_list_to_file(db_file, all_urls)
 print("Done.")
