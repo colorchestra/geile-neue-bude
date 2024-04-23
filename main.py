@@ -7,10 +7,7 @@ import sys
 import time
 import datetime
 import config
-
-index_url = config.index_url
-webhook_url = config.webhook_url
-filter_words = config.filter_words
+from config import index_url, webhook_url, filter_words
 
 db_file = "db.txt"
 all_urls = []
