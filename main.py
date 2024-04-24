@@ -12,7 +12,6 @@ from config import index_url, webhook_url, filter_words
 db_file = "db.txt"
 filtered_file = "filtered.txt"
 all_urls = []
-new_ads = 0
 
 def read_file(file_name):
     try:
@@ -71,13 +70,11 @@ def get_articles_from_index():
                 print("New ad found! " + ad_name)
                 notify(webhook_input = f"{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')} Neue Wohnung!\n\n{ad_name}\nhttps://kleinanzeigen.de{ad_url}")
                 time.sleep(15)  # take a nap to avoid hitting Discord's rate limit. TODO: get the actual time from response headers
-            # new_ads = new_ads + 1 # TODO
 
 print("Reading database file...")
 read_file(db_file)
 print("Scraping ads from Ebay Kleinanzeigen...")
 get_articles_from_index()
-#print("New ads found in this run: " + str(new_ads))
 print("Writing database...")
 write_list_to_file(db_file, all_urls)
 print("Done.")
